@@ -1,0 +1,8 @@
+{
+  "name": "mern-erp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Kunwar-Aditya-Codes/mern-erp.git",
+  "author": "Kunwar Aditya <adityakunwar0147@gmail.com>",
+  "license": "MIT"
+}
