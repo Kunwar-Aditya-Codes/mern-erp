@@ -1,6 +1,9 @@
 const adminEmail = process.env.ADMIN_EMAIL;
 const adminPassword = process.env.ADMIN_PASSWORD;
 const jwt = require("jsonwebtoken");
+const Student = require("../model/Student");
+const Teacher = require("../model/Teacher");
+const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -26,15 +29,15 @@ exports.login = async (req, res) => {
     );
 
     res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      sameSite: "strict",
-      secure: true,
+      // httpOnly: true,
+      // sameSite: "strict",
+      // secure: true,
     });
 
     return res.json({ accessToken });
   }
 
-  //TODO: If the user is not an admin & is a teacher or student
+  return res.status(400).json({ message: "Invalid credentials" });
 };
 
 exports.refreshToken = async (req, res) => {};
