@@ -73,13 +73,13 @@ exports.loginStudent = async (req, res) => {
   }
 
   const accessToken = jwt.sign(
-    { sId, role: student.role },
+    { email: student.sEmail, role: student.role },
     process.env.ACCESS_TOKEN,
     { expiresIn: "15m" }
   );
 
   const refreshToken = jwt.sign(
-    { sId, role: student.role },
+    { email: student.sEmail, role: student.role },
     process.env.REFRESH_TOKEN,
     {
       expiresIn: "7d",
@@ -118,13 +118,13 @@ exports.loginTeacher = async (req, res) => {
   }
 
   const accessToken = jwt.sign(
-    { tId, role: teacher.role },
+    { email: teacher.tEmail, role: teacher.role },
     process.env.ACCESS_TOKEN,
     { expiresIn: "15m" }
   );
 
   const refreshToken = jwt.sign(
-    { tId, role: teacher.role },
+    { email: teacher.tEmail, role: teacher.role },
     process.env.REFRESH_TOKEN,
     {
       expiresIn: "7d",
@@ -158,52 +158,18 @@ exports.refreshToken = async (req, res) => {
 
   const { role } = decoded;
 
-  if (role === "admin") {
-    const accessToken = jwt.sign(
-      {
-        email: decoded.email,
-        role: "admin",
-      },
-      process.env.ACCESS_TOKEN,
-      {
-        expiresIn: "15m",
-      }
-    );
+  const accessToken = jwt.sign(
+    {
+      email: decoded.email,
+      role,
+    },
+    process.env.ACCESS_TOKEN,
+    {
+      expiresIn: "15m",
+    }
+  );
 
-    return res.json({ accessToken, role });
-  }
-
-  if (role === "student") {
-    const accessToken = jwt.sign(
-      {
-        sId: decoded.sId,
-        role,
-      },
-      process.env.ACCESS_TOKEN,
-      {
-        expiresIn: "15m",
-      }
-    );
-
-    return res.json({ accessToken, role });
-  }
-
-  if (role === "teacher") {
-    const accessToken = jwt.sign(
-      {
-        tId: decoded.tId,
-        role,
-      },
-      process.env.ACCESS_TOKEN,
-      {
-        expiresIn: "15m",
-      }
-    );
-
-    return res.json({ accessToken, role });
-  }
-
-  return res.status(401).json({ message: "Unauthorized" });
+  return res.json({ accessToken, role });
 };
 
 // @route   POST /api/auth/logout

@@ -63,6 +63,8 @@ exports.createUser = async (req, res) => {
 // @desc    Get all users
 // @access  Private - Admin
 exports.getUsers = async (req, res) => {
+  console.log(req.role);
+
   const students = await Student.find().select("-sPassword");
   const teachers = await Teacher.find().select("-tPassword");
 

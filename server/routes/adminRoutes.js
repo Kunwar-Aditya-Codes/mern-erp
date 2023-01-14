@@ -4,11 +4,14 @@ const {
   deleteUser,
   getUsers,
 } = require("../controller/adminController");
+const verifyJwt = require("../middleware/verifyJwt");
 
 router.use((req, res, next) => {
   console.log("Admin route");
   next();
 });
+
+router.use(verifyJwt);
 
 router.post("/createUser", createUser);
 
