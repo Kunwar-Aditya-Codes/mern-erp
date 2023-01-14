@@ -56,6 +56,11 @@ exports.createUser = async (req, res) => {
   return res.status(400).json({ message: "Error creating user" });
 };
 
-exports.getUsers = async (req, res) => {};
+exports.getUsers = async (req, res) => {
+  const students = await Student.find().select("-sPassword");
+  const teachers = await Teacher.find().select("-tPassword");
+
+  return res.json({ students, teachers });
+};
 
 exports.deleteUser = async (req, res) => {};
