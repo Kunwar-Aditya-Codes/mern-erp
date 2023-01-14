@@ -63,4 +63,23 @@ exports.getUsers = async (req, res) => {
   return res.json({ students, teachers });
 };
 
-exports.deleteUser = async (req, res) => {};
+exports.deleteUser = async (req, res) => {
+  const { id, role } = req.body;
+
+  if (!id || !role) {
+    return res.status(400).json({ message: "Please enter all fields" });
+  }
+
+  if (role === "student") {
+    await Student.findByIdAndDelete(id);
+    return res.json({ message: "Student deleted!" });
+  }
+
+  if (role === "teacher") {
+    await Teacher.findByIdAndDelete(id);
+    return res.json({ message: "Teacher deleted!" });
+  }
+
+  return res.status(400).json({ message: "Error deleting user" });
+};
+
