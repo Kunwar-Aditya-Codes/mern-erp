@@ -11,6 +11,7 @@ exports.createUser = async (req, res) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
+  // Create a new student *****************************************************
   if (role === "student") {
     const student = await Student.findOne({ sId: uId });
 
@@ -31,6 +32,7 @@ exports.createUser = async (req, res) => {
     return res.json({ message: "Student created!" });
   }
 
+  // Create a new teacher *****************************************************
   if (role === "teacher") {
     const teacher = await Teacher.findOne({ tId: uId });
 
@@ -46,9 +48,9 @@ exports.createUser = async (req, res) => {
       tImage: image,
     });
 
-    const savedTeacher = await newTeacher.save();
+    await newTeacher.save();
 
-    return res.json({ savedTeacher });
+    return res.json({ message: "Teacher created!" });
   }
 
   return res.status(400).json({ message: "Error creating user" });
