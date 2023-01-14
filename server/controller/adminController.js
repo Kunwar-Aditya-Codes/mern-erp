@@ -26,9 +26,9 @@ exports.createUser = async (req, res) => {
       sImage: image,
     });
 
-    const savedStudent = await newStudent.save();
+    await newStudent.save();
 
-    return res.json({ savedStudent });
+    return res.json({ message: "Student created!" });
   }
 
   if (role === "teacher") {
