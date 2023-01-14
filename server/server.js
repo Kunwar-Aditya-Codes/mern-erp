@@ -3,6 +3,7 @@ require("express-async-errors");
 const express = require("express");
 const PORT = process.env.PORT || 5000;
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const app = express();
 
@@ -12,6 +13,7 @@ mongoConnect();
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));

@@ -1,5 +1,11 @@
 const router = require("express").Router();
-const { login, refreshToken, logout } = require("../controller/authController");
+const {
+  login,
+  refreshToken,
+  logout,
+  loginStudent,
+  loginTeacher,
+} = require("../controller/authController");
 
 router.use((req, res, next) => {
   console.log("Auth route");
@@ -7,6 +13,10 @@ router.use((req, res, next) => {
 });
 
 router.route("/login").post(login);
+
+router.route("/login-student").post(loginStudent);
+
+router.route("/login-teacher").post(loginTeacher);
 
 router.route("/refresh-token").get(refreshToken);
 

@@ -2,6 +2,9 @@ const Student = require("../model/Student");
 const Teacher = require("../model/Teacher");
 const bcrypt = require("bcrypt");
 
+// @route   POST /api/admin/createUser
+// @desc    Create a new user
+// @access  Private - Admin
 exports.createUser = async (req, res) => {
   const { name, email, password, role, image, uId } = req.body;
 
@@ -56,6 +59,9 @@ exports.createUser = async (req, res) => {
   return res.status(400).json({ message: "Error creating user" });
 };
 
+// @route   GET /api/admin/getUsers
+// @desc    Get all users
+// @access  Private - Admin
 exports.getUsers = async (req, res) => {
   const students = await Student.find().select("-sPassword");
   const teachers = await Teacher.find().select("-tPassword");
@@ -63,6 +69,9 @@ exports.getUsers = async (req, res) => {
   return res.json({ students, teachers });
 };
 
+// @route   POST /api/admin/deleteUser
+// @desc    Delete a user
+// @access  Private - Admin
 exports.deleteUser = async (req, res) => {
   const { id, role } = req.body;
 
@@ -82,4 +91,3 @@ exports.deleteUser = async (req, res) => {
 
   return res.status(400).json({ message: "Error deleting user" });
 };
-
