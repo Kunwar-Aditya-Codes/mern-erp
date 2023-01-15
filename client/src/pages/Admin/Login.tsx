@@ -67,7 +67,7 @@ const Login = () => {
 
           <Link
             to="/"
-            className="text-center text-base text-zinc-500 underline underline-offset-4 "
+            className="text-center text-base text-zinc-500 underline underline-offset-4 hover:text-zinc-300 "
           >
             Go Back
           </Link>
