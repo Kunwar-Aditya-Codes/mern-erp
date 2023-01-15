@@ -1,8 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Welcome from "./pages/Welcome";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-red-500">React App</h1>
-    </div>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index path="/" element={<Welcome />} />
+      </Route>
+    </Routes>
   );
 }
 
