@@ -31,7 +31,7 @@ const StudentLogin = () => {
 
     toast.success("Login successful");
 
-    navigate("/student-dashboard");
+    navigate("/dashboard/student");
   };
 
   return (

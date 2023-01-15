@@ -31,7 +31,7 @@ const TeacherLogin = () => {
 
     toast.success("Login successful");
 
-    navigate("/teacher-dashboard");
+    navigate("/dashboard/teacher");
   };
 
   return (
