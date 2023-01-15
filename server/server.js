@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/teacher", require("./routes/teacherRoutes"));
+app.use("/api/student", require("./routes/studentRoutes"));
 
 mongoose.connection.once("open", () => {
   console.log("Connected to db!");
