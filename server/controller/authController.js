@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
       },
       process.env.ACCESS_TOKEN,
       {
-        expiresIn: "15m",
+        expiresIn: "1d", // 15 min
       }
     );
 
@@ -75,7 +75,7 @@ exports.loginStudent = async (req, res) => {
   const accessToken = jwt.sign(
     { email: student.sEmail, role: student.role },
     process.env.ACCESS_TOKEN,
-    { expiresIn: "15m" }
+    { expiresIn: "1d" } // 15m
   );
 
   const refreshToken = jwt.sign(
@@ -120,7 +120,7 @@ exports.loginTeacher = async (req, res) => {
   const accessToken = jwt.sign(
     { email: teacher.tEmail, role: teacher.role },
     process.env.ACCESS_TOKEN,
-    { expiresIn: "15m" }
+    { expiresIn: "1d" } // 15m
   );
 
   const refreshToken = jwt.sign(
