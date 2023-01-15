@@ -30,7 +30,7 @@ const Login = () => {
 
     toast.success("Login Successful");
 
-    navigate("/admin/dashboard");
+    navigate("/dashboard/admin");
   };
 
   return (
