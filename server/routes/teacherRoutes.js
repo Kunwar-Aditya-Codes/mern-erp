@@ -1,5 +1,9 @@
 const router = require("express").Router();
-const { getTeacher } = require("../controller/teacherController");
+const {
+  getTeacher,
+  getStudentMarks,
+  addStudentMarks,
+} = require("../controller/teacherController");
 const verifyJwt = require("../middleware/verifyJwt");
 
 router.use((req, res, next) => {
@@ -10,5 +14,9 @@ router.use((req, res, next) => {
 router.use(verifyJwt);
 
 router.route("/").get(getTeacher);
+
+router.route("/marks-list").get(getStudentMarks);
+
+router.route("/marks-list/:id").post(addStudentMarks);
 
 module.exports = router;
