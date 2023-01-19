@@ -1,4 +1,4 @@
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon, PowerIcon } from '@heroicons/react/24/solid';
 
 const Sidebar = ({
   sidebar,
@@ -10,7 +10,7 @@ const Sidebar = ({
   return (
     <div className='flex h-full flex-col p-4'>
       <XMarkIcon
-        className='mb-4 h-5 w-5 cursor-pointer md:hidden'
+        className='mb-4 h-7 w-7 cursor-pointer rounded-md bg-violet-700 p-1 text-zinc-300 md:hidden'
         onClick={() => setSidebar(!sidebar)}
       />
 
@@ -25,6 +25,11 @@ const Sidebar = ({
         <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10'>
           View Teacher
         </h1>
+      </div>
+
+      <div className='flex items-center rounded-md bg-zinc-300/10 p-2 text-zinc-300'>
+        <PowerIcon className=' h-7 w-7 cursor-pointer rounded-md bg-violet-700 p-1 text-zinc-300' />
+        <span className='ml-2'>Logout</span>
       </div>
     </div>
   );
