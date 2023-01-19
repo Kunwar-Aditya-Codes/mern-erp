@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
+import { useLoginMutation } from '../../app/slices/authApiSlice';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../app/slices/authSlice';
 
 const Login = () => {
   interface Login {
@@ -9,24 +12,38 @@ const Login = () => {
   }
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [login, setLogin] = useState<Login>({
     email: '',
     password: '',
   });
 
+  const [loginMutation, { isLoading, isSuccess, isError }] = useLoginMutation();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // TODO: Add login logic
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (login.email === '' || login.password === '') {
       toast.error('Please fill all the fields');
       return;
     }
+
+    const res: any = await loginMutation({
+      email: login.email,
+      password: login.password,
+    });
+
+    if (res.error) {
+      toast.error(res.error.data.message);
+      return;
+    }
+
+    dispatch(setToken(res.data.accessToken));
 
     toast.success('Login Successful');
 
@@ -58,7 +75,7 @@ const Login = () => {
             className='rounded-md border border-violet-700 bg-transparent p-2 placeholder-zinc-500 outline-none  '
           />
           <button
-            disabled={login.email === '' || login.password === ''}
+            disabled={login.email === '' || login.password === '' || isLoading}
             type='submit'
             className='rounded-md bg-violet-700 p-2 text-white disabled:cursor-not-allowed  disabled:text-white/50 '
           >
