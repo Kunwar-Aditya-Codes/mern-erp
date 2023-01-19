@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import toast from "react-hot-toast";
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const TeacherLogin = () => {
   interface TeacherLogin {
@@ -11,8 +11,8 @@ const TeacherLogin = () => {
   const navigate = useNavigate();
 
   const [teacherLogin, setTeacherLogin] = useState<TeacherLogin>({
-    tId: "",
-    password: "",
+    tId: '',
+    password: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,50 +25,50 @@ const TeacherLogin = () => {
     e.preventDefault();
 
     if (!teacherLogin.tId || !teacherLogin.password) {
-      toast.error("Please fill in all fields");
+      toast.error('Please fill in all fields');
       return;
     }
 
-    toast.success("Login successful");
+    toast.success('Login successful');
 
-    navigate("/dashboard/teacher");
+    navigate('/dashboard/teacher');
   };
 
   return (
-    <div className="flex h-full items-center justify-center p-4 ">
-      <div className="h-[50%] w-full max-w-[45rem] rounded-md bg-zinc-900/80 shadow-lg ">
+    <div className='flex h-full items-center justify-center p-4 '>
+      <div className='h-[50%] w-full max-w-[45rem] rounded-md bg-zinc-900/80 shadow-lg '>
         <form
           onSubmit={handleSubmit}
-          className="flex h-full w-full flex-col justify-between p-8 text-lg text-white"
+          className='flex h-full w-full flex-col justify-between p-8 text-lg text-white'
         >
           <input
-            type="tId"
-            name="tId"
+            type='tId'
+            name='tId'
             onChange={handleChange}
             value={teacherLogin.tId}
-            placeholder="Teacher Id"
+            placeholder='Teacher Id'
             autoFocus
-            className="rounded-md border border-zinc-300/10 bg-transparent p-2 placeholder-zinc-500 outline-none focus:border-zinc-300"
+            className='rounded-md border border-violet-700 bg-transparent p-2 placeholder-zinc-500 outline-none '
           />
           <input
-            type="password"
-            name="password"
+            type='password'
+            name='password'
             onChange={handleChange}
             value={teacherLogin.password}
-            placeholder="Password"
-            className="rounded-md border border-zinc-300/10 bg-transparent p-2 placeholder-zinc-500 outline-none focus:border-zinc-300 "
+            placeholder='Password'
+            className='rounded-md border border-violet-700 bg-transparent p-2 placeholder-zinc-500 outline-none '
           />
           <button
-            disabled={teacherLogin.tId === "" || teacherLogin.password === ""}
-            type="submit"
-            className="rounded-md bg-zinc-300/10 p-2 text-zinc-300 disabled:cursor-not-allowed  disabled:text-zinc-500 "
+            disabled={teacherLogin.tId === '' || teacherLogin.password === ''}
+            type='submit'
+            className='rounded-md bg-violet-700 p-2 text-white disabled:cursor-not-allowed  disabled:text-white/50 '
           >
             Login
           </button>
 
           <Link
-            to="/"
-            className="text-center text-base text-zinc-500 underline underline-offset-4 hover:text-zinc-300 "
+            to='/'
+            className='w-fit self-center text-center text-base text-zinc-500 underline underline-offset-4 hover:text-zinc-300'
           >
             Go Back
           </Link>
