@@ -8,6 +8,7 @@ import TeacherLogin from './pages/Teacher/TeacherLogin';
 import Dashboard from './components/Dashboard';
 import AdminHome from './pages/Admin/AdminHome';
 import RequireAuth from './components/RequireAuth';
+import { Roles } from './utils/Roles';
 
 function App() {
   return (
@@ -20,10 +21,14 @@ function App() {
         <Route path='/teacher-login' element={<TeacherLogin />} />
 
         {/* Protected routes */}
-        <Route element={<RequireAuth allowedRole={'admin'} />}>
+        <Route
+          element={<RequireAuth allowedRole={[...Object.values(Roles)]} />}
+        >
           <Route path='/dashboard/*' element={<Dashboard />}>
             {/* Authorized Routes */}
-            <Route path='admin' element={<AdminHome />} />
+            <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
+              <Route path='admin' element={<AdminHome />} />
+            </Route>
           </Route>
         </Route>
 
