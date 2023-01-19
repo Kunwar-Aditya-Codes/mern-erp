@@ -19,7 +19,7 @@ const Login = () => {
     password: '',
   });
 
-  const [loginMutation, { isLoading, isSuccess, isError }] = useLoginMutation();
+  const [loginMutation, { isLoading }] = useLoginMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -28,8 +28,10 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    toast.loading('Logging in...', { id: 'login' });
+
     if (login.email === '' || login.password === '') {
-      toast.error('Please fill all the fields');
+      toast.error('Please fill all the fields', { id: 'login' });
       return;
     }
 
@@ -39,13 +41,13 @@ const Login = () => {
     });
 
     if (res.error) {
-      toast.error(res.error.data.message);
+      toast.error(res.error.data.message, { id: 'login' });
       return;
     }
 
     dispatch(setToken(res.data.accessToken));
 
-    toast.success('Login Successful');
+    toast.success('Login Successful', { id: 'login' });
 
     navigate('/dashboard/admin');
   };
