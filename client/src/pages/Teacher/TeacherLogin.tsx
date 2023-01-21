@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { setToken } from '../../app/slices/authSlice';
+import { useTeacherLoginMutation } from '../../app/slices/authApiSlice';
 
 const TeacherLogin = () => {
   interface TeacherLogin {
@@ -8,6 +11,7 @@ const TeacherLogin = () => {
     password: string;
   }
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [teacherLogin, setTeacherLogin] = useState<TeacherLogin>({
@@ -15,21 +19,40 @@ const TeacherLogin = () => {
     password: '',
   });
 
+  const [teacherLoginMutation, { isLoading }] = useTeacherLoginMutation();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTeacherLogin({ ...teacherLogin, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // TODO: Add login logic
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    toast.loading('Logging in...', { id: 'login' });
+
     if (!teacherLogin.tId || !teacherLogin.password) {
-      toast.error('Please fill in all fields');
+      toast.error('Please fill in all fields', {
+        id: 'login',
+      });
       return;
     }
 
-    toast.success('Login successful');
+    const res: any = await teacherLoginMutation({
+      tId: teacherLogin.tId,
+      tPassword: teacherLogin.password,
+    });
+
+    if (res.error) {
+      toast.error(res.error.data.message, { id: 'login' });
+      return;
+    }
+
+    dispatch(setToken(res.data.accessToken));
+
+    toast.success('Login successful', {
+      id: 'login',
+    });
 
     navigate('/dashboard/teacher');
   };

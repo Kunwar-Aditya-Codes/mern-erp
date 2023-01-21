@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import AdminHome from './pages/Admin/AdminHome';
 import RequireAuth from './components/RequireAuth';
 import { Roles } from './utils/Roles';
+import TeacherHome from './pages/Teacher/TeacherHome';
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
             {/* Authorized Routes */}
             <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
               <Route path='admin' element={<AdminHome />} />
+            </Route>
+
+            <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
+              <Route path='teacher' element={<TeacherHome />} />
             </Route>
           </Route>
         </Route>

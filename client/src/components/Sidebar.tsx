@@ -9,8 +9,6 @@ const Sidebar = ({
   setSidebar: React.Dispatch<React.SetStateAction<Boolean>>;
   user: any;
 }) => {
-  console.log(user);
-
   return (
     <div className='flex h-full flex-col p-4'>
       <XMarkIcon

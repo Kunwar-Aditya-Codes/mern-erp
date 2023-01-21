@@ -9,7 +9,15 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: { email, password },
       }),
     }),
+
+    teacherLogin: builder.mutation({
+      query: ({ tId, tPassword }: { tId: string; tPassword: string }) => ({
+        url: '/auth/login-teacher',
+        method: 'POST',
+        body: { tId, tPassword },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useTeacherLoginMutation } = authApiSlice;

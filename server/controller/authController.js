@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
 };
 
 // @route   POST /api/auth/login-student
-// @desc    Login user
+// @desc    Login student
 // @access  Public
 exports.loginStudent = async (req, res) => {
   const { sId, sPassword } = req.body;
@@ -96,7 +96,7 @@ exports.loginStudent = async (req, res) => {
 };
 
 // @route   POST /api/auth/login-teacher
-// @desc    Login user
+// @desc    Login teacher
 // @access  Public
 exports.loginTeacher = async (req, res) => {
   const { tId, tPassword } = req.body;
