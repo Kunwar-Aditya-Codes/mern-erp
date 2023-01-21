@@ -82,7 +82,11 @@ const TeacherLogin = () => {
             className='rounded-md border border-violet-700 bg-transparent p-2 placeholder-zinc-500 outline-none '
           />
           <button
-            disabled={teacherLogin.tId === '' || teacherLogin.password === ''}
+            disabled={
+              teacherLogin.tId === '' ||
+              teacherLogin.password === '' ||
+              isLoading
+            }
             type='submit'
             className='rounded-md bg-violet-700 p-2 text-white disabled:cursor-not-allowed  disabled:text-white/50 '
           >

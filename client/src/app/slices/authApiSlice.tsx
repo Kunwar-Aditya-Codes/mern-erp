@@ -17,7 +17,19 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: { tId, tPassword },
       }),
     }),
+
+    studentLogin: builder.mutation({
+      query: ({ sId, sPassword }: { sId: string; sPassword: string }) => ({
+        url: '/auth/login-student',
+        method: 'POST',
+        body: { sId, sPassword },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useTeacherLoginMutation } = authApiSlice;
+export const {
+  useLoginMutation,
+  useTeacherLoginMutation,
+  useStudentLoginMutation,
+} = authApiSlice;
