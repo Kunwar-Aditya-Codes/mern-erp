@@ -1,4 +1,5 @@
 import { apiSlice } from '../apiSlice';
+import { setToken } from './authSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,6 +26,31 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: { sId, sPassword },
       }),
     }),
+
+    refresh: builder.mutation({
+      query: () => ({
+        url: '/auth/refresh-token',
+        method: 'GET',
+      }),
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        const res = await queryFulfilled;
+        const accessToken = res.data.accessToken;
+        dispatch(setToken(accessToken));
+      },
+    }),
+
+    logout: builder.mutation({
+      query: () => ({
+        url: '/auth/logout',
+        method: 'GET',
+      }),
+
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(setToken(null));
+      },
+    }),
   }),
 });
 
@@ -32,4 +58,6 @@ export const {
   useLoginMutation,
   useTeacherLoginMutation,
   useStudentLoginMutation,
+  useRefreshMutation,
+  useLogoutMutation,
 } = authApiSlice;
