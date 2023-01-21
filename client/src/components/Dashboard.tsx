@@ -13,7 +13,7 @@ const Dashboard = () => {
       <div
         className={`${
           sidebar ? 'translate-x-0' : '-translate-x-full'
-        } absolute h-full w-full transform border-b-2 border-zinc-300/20 bg-zinc-900/80 duration-300 ease-in-out md:relative md:flex-[0.2]  md:translate-x-0`}
+        } absolute h-full w-full transform border-b-2 border-zinc-300/20 bg-zinc-900 duration-300 ease-in-out md:relative md:flex-[0.2]  md:translate-x-0`}
       >
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} user={userDecoded} />
       </div>
