@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [sidebar, setSidebar] = useState<Boolean>(false);
 
   return (
-    <div className='relative flex h-full'>
+    <div className='relative flex h-full overflow-hidden'>
       <div
         className={`${
           sidebar ? 'translate-x-0' : '-translate-x-full'
@@ -17,7 +17,7 @@ const Dashboard = () => {
       >
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} user={userDecoded} />
       </div>
-      <div className='space-y-4 p-4 md:flex-[0.8]'>
+      <div className='flex-grow space-y-4 p-4 md:flex-[0.8]'>
         <Bars3Icon
           className='h-5 w-5 cursor-pointer md:hidden'
           onClick={() => setSidebar(!sidebar)}

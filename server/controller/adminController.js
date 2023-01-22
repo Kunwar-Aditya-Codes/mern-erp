@@ -9,7 +9,7 @@ exports.createUser = async (req, res) => {
   const { name, email, password, role, image, uId } = req.body;
 
   if (!name || !email || !password || !role || !uId) {
-    return res.status(400).json({ message: 'Please enter all fields' });
+    return res.status(400).json({ message: 'Please enter all fields !' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
