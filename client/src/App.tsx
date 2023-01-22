@@ -11,6 +11,7 @@ import RequireAuth from './components/RequireAuth';
 import { Roles } from './utils/Roles';
 import TeacherHome from './pages/Teacher/TeacherHome';
 import StudentHome from './pages/Student/StudentHome';
+import PersistLogin from './components/PersistLogin';
 
 function App() {
   return (
@@ -23,21 +24,23 @@ function App() {
         <Route path='/teacher-login' element={<TeacherLogin />} />
 
         {/* Protected routes */}
-        <Route
-          element={<RequireAuth allowedRole={[...Object.values(Roles)]} />}
-        >
-          <Route path='/dashboard/*' element={<Dashboard />}>
-            {/* Authorized Routes */}
-            <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
-              <Route path='admin' element={<AdminHome />} />
-            </Route>
+        <Route element={<PersistLogin />}>
+          <Route
+            element={<RequireAuth allowedRole={[...Object.values(Roles)]} />}
+          >
+            <Route path='/dashboard/*' element={<Dashboard />}>
+              {/* Authorized Routes */}
+              <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
+                <Route path='admin' element={<AdminHome />} />
+              </Route>
 
-            <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
-              <Route path='teacher' element={<TeacherHome />} />
-            </Route>
+              <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
+                <Route path='teacher' element={<TeacherHome />} />
+              </Route>
 
-            <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
-              <Route path='student' element={<StudentHome />} />
+              <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
+                <Route path='student' element={<StudentHome />} />
+              </Route>
             </Route>
           </Route>
         </Route>

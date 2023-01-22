@@ -18,6 +18,11 @@ const Sidebar = ({
 
   const [logoutMutation] = useLogoutMutation();
 
+  const handleLogout = () => {
+    localStorage.clear();
+    logoutMutation({}).then(() => navigate('/'));
+  };
+
   return (
     <div className='flex h-full flex-col p-4'>
       <XMarkIcon
@@ -68,7 +73,7 @@ const Sidebar = ({
       </div>
 
       <div
-        onClick={() => logoutMutation({}).then(() => navigate('/'))}
+        onClick={handleLogout}
         className='flex cursor-pointer items-center rounded-md bg-zinc-300/10 p-2 text-zinc-300'
       >
         <PowerIcon className=' h-7 w-7   rounded-md bg-violet-700 p-1 text-zinc-300' />

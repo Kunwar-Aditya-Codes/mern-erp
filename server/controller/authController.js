@@ -156,6 +156,8 @@ exports.refreshToken = async (req, res) => {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
+  const role = decoded.role;
+
   const accessToken = jwt.sign(
     {
       email: decoded.email,
