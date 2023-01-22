@@ -1,6 +1,6 @@
 import { XMarkIcon, PowerIcon } from '@heroicons/react/24/solid';
 import { useLogoutMutation } from '../app/slices/authApiSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({
   sidebar,
@@ -38,11 +38,19 @@ const Sidebar = ({
       </h1>
 
       <div className='mt-6 flex-grow space-y-4 border-t-2 border-zinc-300/20 p-2  tracking-wide  text-zinc-500 underline underline-offset-[5px] md:text-lg'>
+        <Link to={`/dashboard/${user.role}`}>
+          <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
+            Home
+          </h1>
+        </Link>
+
         {user.role === 'admin' && (
           <>
-            <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
-              View Students
-            </h1>
+            <Link to='/dashboard/admin/students'>
+              <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
+                View Students
+              </h1>
+            </Link>
             <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
               View Teacher
             </h1>

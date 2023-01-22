@@ -12,6 +12,7 @@ import { Roles } from './utils/Roles';
 import TeacherHome from './pages/Teacher/TeacherHome';
 import StudentHome from './pages/Student/StudentHome';
 import PersistLogin from './components/PersistLogin';
+import AdminViewStudents from './pages/Admin/AdminViewStudents';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               {/* Authorized Routes */}
               <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
                 <Route path='admin' element={<AdminHome />} />
+                <Route path='admin/students' element={<AdminViewStudents />} />
               </Route>
 
               <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
