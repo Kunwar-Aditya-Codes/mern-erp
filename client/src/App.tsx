@@ -29,19 +29,25 @@ function App() {
           <Route
             element={<RequireAuth allowedRole={[...Object.values(Roles)]} />}
           >
-            <Route path='/dashboard/*' element={<Dashboard />}>
+            <Route path='/dashboard/' element={<Dashboard />}>
               {/* Authorized Routes */}
               <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
-                <Route path='admin' element={<AdminHome />} />
-                <Route path='admin/students' element={<AdminViewStudents />} />
+                <Route path='admin'>
+                  <Route index element={<AdminHome />} />
+                  <Route path='students' element={<AdminViewStudents />} />
+                </Route>
               </Route>
 
               <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
-                <Route path='teacher' element={<TeacherHome />} />
+                <Route path='teacher'>
+                  <Route index element={<TeacherHome />} />
+                </Route>
               </Route>
 
               <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
-                <Route path='student' element={<StudentHome />} />
+                <Route path='student'>
+                  <Route index element={<StudentHome />} />
+                </Route>
               </Route>
             </Route>
           </Route>

@@ -11,6 +11,13 @@ const adminApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+
+    getUsers: builder.mutation({
+      query: (role) => ({
+        url: `/admin/getUsers/${role}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 

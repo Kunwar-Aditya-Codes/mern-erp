@@ -59,7 +59,7 @@ exports.createUser = async (req, res) => {
   return res.status(400).json({ message: 'Error creating user' });
 };
 
-// @route   GET /api/admin/getUsers
+// @route   GET /api/admin/getUsers/:role
 // @desc    Get all users
 // @access  Private - Admin
 exports.getUsers = async (req, res) => {
@@ -67,10 +67,19 @@ exports.getUsers = async (req, res) => {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  const students = await Student.find().select('-sPassword');
-  const teachers = await Teacher.find().select('-tPassword');
+  const { role } = req.params;
 
-  return res.json({ students, teachers });
+  if (role === 'student') {
+    const students = await Student.find().select('-sPassword');
+    return res.json({ students });
+  }
+
+  if (role === 'teacher') {
+    const teachers = await Teacher.find().select('-tPassword');
+    return res.json({ teachers });
+  }
+
+  return res.status(400).json({ message: 'Error getting users' });
 };
 
 // @route   POST /api/admin/deleteUser
