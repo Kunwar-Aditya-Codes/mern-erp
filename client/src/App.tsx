@@ -13,6 +13,7 @@ import TeacherHome from './pages/Teacher/TeacherHome';
 import StudentHome from './pages/Student/StudentHome';
 import PersistLogin from './components/PersistLogin';
 import AdminViewStudents from './pages/Admin/AdminViewStudents';
+import Prefetch from './components/Prefetch';
 
 function App() {
   return (
@@ -33,8 +34,10 @@ function App() {
               {/* Authorized Routes */}
               <Route element={<RequireAuth allowedRole={[Roles.admin]} />}>
                 <Route path='admin'>
-                  <Route index element={<AdminHome />} />
-                  <Route path='students' element={<AdminViewStudents />} />
+                  <Route element={<Prefetch />}>
+                    <Route index element={<AdminHome />} />
+                    <Route path='students' element={<AdminViewStudents />} />
+                  </Route>
                 </Route>
               </Route>
 

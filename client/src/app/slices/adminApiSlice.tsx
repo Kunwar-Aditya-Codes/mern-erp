@@ -1,6 +1,6 @@
 import { apiSlice } from '../apiSlice';
 
-const adminApiSlice = apiSlice.injectEndpoints({
+export const adminApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation({
       query: (formData) => ({
@@ -12,13 +12,13 @@ const adminApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getUsers: builder.mutation({
-      query: (role) => ({
-        url: `/admin/getUsers/${role}`,
+    getStudents: builder.query({
+      query: () => ({
+        url: '/admin/getUsers/students',
         method: 'GET',
       }),
     }),
   }),
 });
 
-export const { useCreateUserMutation } = adminApiSlice;
+export const { useCreateUserMutation, useGetStudentsQuery } = adminApiSlice;

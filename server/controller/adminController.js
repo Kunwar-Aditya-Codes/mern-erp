@@ -59,27 +59,28 @@ exports.createUser = async (req, res) => {
   return res.status(400).json({ message: 'Error creating user' });
 };
 
-// @route   GET /api/admin/getUsers/:role
-// @desc    Get all users
+// @route   GET /api/admin/getUsers/students
+// @desc    Get all students
 // @access  Private - Admin
-exports.getUsers = async (req, res) => {
+exports.getStudents = async (req, res) => {
   if (req.role !== 'admin') {
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  const { role } = req.params;
+  const students = await Student.find().select('-sPassword').lean().exec();
+  return res.json({ students });
+};
 
-  if (role === 'student') {
-    const students = await Student.find().select('-sPassword');
-    return res.json({ students });
+// @route   GET /api/admin/getUsers/teachers
+// @desc    Get all teachers
+// @access  Private - Admin
+exports.getTeachers = async (req, res) => {
+  if (req.role !== 'admin') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
-  if (role === 'teacher') {
-    const teachers = await Teacher.find().select('-tPassword');
-    return res.json({ teachers });
-  }
-
-  return res.status(400).json({ message: 'Error getting users' });
+  const teachers = await Teacher.find().select('-tPassword').lean().exec();
+  return res.json({ teachers });
 };
 
 // @route   POST /api/admin/deleteUser
