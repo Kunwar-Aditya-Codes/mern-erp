@@ -51,9 +51,11 @@ const Sidebar = ({
                 View Students
               </h1>
             </Link>
-            <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
-              View Teacher
-            </h1>
+            <Link to='/dashboard/admin/teachers'>
+              <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
+                View Teachers
+              </h1>
+            </Link>
           </>
         )}
 

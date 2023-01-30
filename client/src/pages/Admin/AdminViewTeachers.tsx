@@ -1,4 +1,4 @@
-import { useGetStudentsQuery } from '../../app/slices/adminApiSlice';
+import { useGetTeachersQuery } from '../../app/slices/adminApiSlice';
 import ListTable from '../../components/ListTable';
 
 interface Props {
@@ -7,9 +7,9 @@ interface Props {
   isLoading: boolean;
 }
 
-const AdminViewStudents = () => {
-  const { data, error, isLoading } = useGetStudentsQuery<Props>(
-    'studentsList',
+const AdminViewTeachers = () => {
+  const { data, error, isLoading } = useGetTeachersQuery<Props>(
+    'teachersList',
     {
       pollingInterval: 60000,
       refetchOnFocus: true,
@@ -24,9 +24,9 @@ const AdminViewStudents = () => {
     ) : error ? (
       <div>Some error occured...</div>
     ) : (
-      data && <ListTable data={data.students} />
+      data && <ListTable data={data?.teachers} />
     );
 
   return content;
 };
-export default AdminViewStudents;
+export default AdminViewTeachers;

@@ -14,6 +14,7 @@ import StudentHome from './pages/Student/StudentHome';
 import PersistLogin from './components/PersistLogin';
 import AdminViewStudents from './pages/Admin/AdminViewStudents';
 import Prefetch from './components/Prefetch';
+import AdminViewTeachers from './pages/Admin/AdminViewTeachers';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                   <Route element={<Prefetch />}>
                     <Route index element={<AdminHome />} />
                     <Route path='students' element={<AdminViewStudents />} />
+                    <Route path='teachers' element={<AdminViewTeachers />} />
                   </Route>
                 </Route>
               </Route>
