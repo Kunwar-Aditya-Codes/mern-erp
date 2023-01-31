@@ -10,6 +10,11 @@ export const Prefetch = () => {
         force: true,
       })
     );
+    store.dispatch(
+      adminApiSlice.util.prefetch('getTeachers', 'teachersList', {
+        force: true,
+      })
+    );
   }, []);
 
   return <Outlet />;

@@ -12,9 +12,7 @@ const AdminViewTeachers = () => {
     'teachersList',
     {
       pollingInterval: 60000,
-      refetchOnFocus: true,
       refetchOnReconnect: true,
-      refetchOnMountOrArgChange: true,
     }
   );
 

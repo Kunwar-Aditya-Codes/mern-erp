@@ -1,6 +1,13 @@
 import { TrashIcon } from '@heroicons/react/24/solid';
+import { useDeleteUserMutation } from '../app/slices/adminApiSlice';
 
 const ListTable = ({ data }: any) => {
+  const [deleteUser] = useDeleteUserMutation();
+
+  const handleDelete = (role: string, _id: string) => {
+    deleteUser({ role, _id });
+  };
+
   return (
     <table className='w-full text-center'>
       <thead className=''>
@@ -18,7 +25,7 @@ const ListTable = ({ data }: any) => {
             <td className='hidden md:table-cell'>{user.email}</td>
             <td>{user.id}</td>
             <td className='w-1/4'>
-              <button>
+              <button onClick={() => handleDelete(user.role, user._id)}>
                 <TrashIcon className='h-5 w-5 hover:text-red-500' />
               </button>
             </td>

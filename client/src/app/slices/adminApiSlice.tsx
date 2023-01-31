@@ -10,6 +10,8 @@ export const adminApiSlice = apiSlice.injectEndpoints({
           ...formData,
         },
       }),
+
+      invalidatesTags: ['Student', 'Teacher'],
     }),
 
     getStudents: builder.query({
@@ -24,12 +26,15 @@ export const adminApiSlice = apiSlice.injectEndpoints({
             name: student.sName,
             email: student.sEmail,
             id: student.sId,
+            role: student.role,
             _id: student._id,
           };
         });
 
         return response;
       },
+
+      providesTags: ['Student'],
     }),
 
     getTeachers: builder.query({
@@ -44,12 +49,28 @@ export const adminApiSlice = apiSlice.injectEndpoints({
             name: teacher.tName,
             email: teacher.tEmail,
             id: teacher.tId,
+            role: teacher.role,
             _id: teacher._id,
           };
         });
 
         return response;
       },
+
+      providesTags: ['Teacher'],
+    }),
+
+    deleteUser: builder.mutation({
+      query: (data) => ({
+        url: '/admin/deleteUser',
+        method: 'DELETE',
+        body: {
+          id: data._id,
+          role: data.role,
+        },
+      }),
+
+      invalidatesTags: ['Student', 'Teacher'],
     }),
   }),
 });
@@ -58,4 +79,5 @@ export const {
   useCreateUserMutation,
   useGetStudentsQuery,
   useGetTeachersQuery,
+  useDeleteUserMutation,
 } = adminApiSlice;
