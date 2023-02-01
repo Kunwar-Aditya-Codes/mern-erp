@@ -31,6 +31,12 @@ const ListTable = ({ data }: any) => {
             </td>
           </tr>
         ))}
+
+        {!data.length && (
+          <tr>
+            <td colSpan={4}>No data found</td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

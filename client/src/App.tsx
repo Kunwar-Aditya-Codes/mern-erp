@@ -15,6 +15,7 @@ import PersistLogin from './components/PersistLogin';
 import AdminViewStudents from './pages/Admin/AdminViewStudents';
 import Prefetch from './components/Prefetch';
 import AdminViewTeachers from './pages/Admin/AdminViewTeachers';
+import SProfile from './pages/Student/SProfile';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
               <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
                 <Route path='student'>
                   <Route index element={<StudentHome />} />
+                  <Route path='profile' element={<SProfile />} />
                 </Route>
               </Route>
             </Route>

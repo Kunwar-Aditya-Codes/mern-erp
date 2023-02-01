@@ -72,9 +72,11 @@ const Sidebar = ({
 
         {user.role === 'student' && (
           <>
-            <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
-              View Profile
-            </h1>
+            <Link to='/dashboard/student/profile'>
+              <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
+                View Profile
+              </h1>
+            </Link>
             <h1 className='cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
               View Marks
             </h1>

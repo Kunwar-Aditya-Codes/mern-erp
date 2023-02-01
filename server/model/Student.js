@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
   sName: {
@@ -23,18 +23,19 @@ const studentSchema = new mongoose.Schema({
 
   sImage: {
     type: String,
-    default: "",
+    default:
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
   },
 
   sMarks: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Marks",
+    ref: 'Marks',
   },
 
   role: {
     type: String,
-    default: "student",
+    default: 'student',
   },
 });
 
-module.exports = mongoose.model("Student", studentSchema);
+module.exports = mongoose.model('Student', studentSchema);
