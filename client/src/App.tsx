@@ -9,13 +9,12 @@ import Dashboard from './components/Dashboard';
 import AdminHome from './pages/Admin/AdminHome';
 import RequireAuth from './components/RequireAuth';
 import { Roles } from './utils/Roles';
-import TeacherHome from './pages/Teacher/TeacherHome';
-import StudentHome from './pages/Student/StudentHome';
 import PersistLogin from './components/PersistLogin';
 import AdminViewStudents from './pages/Admin/AdminViewStudents';
 import Prefetch from './components/Prefetch';
 import AdminViewTeachers from './pages/Admin/AdminViewTeachers';
 import SProfile from './pages/Student/SProfile';
+import TProfile from './pages/Teacher/TProfile';
 
 function App() {
   return (
@@ -46,14 +45,13 @@ function App() {
 
               <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
                 <Route path='teacher'>
-                  <Route index element={<TeacherHome />} />
+                  <Route index element={<TProfile />} />
                 </Route>
               </Route>
 
               <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
                 <Route path='student'>
-                  <Route index element={<StudentHome />} />
-                  <Route path='profile' element={<SProfile />} />
+                  <Route index element={<SProfile />} />
                 </Route>
               </Route>
             </Route>
