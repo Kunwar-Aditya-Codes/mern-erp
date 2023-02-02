@@ -1,5 +1,5 @@
-const Teacher = require("../model/Teacher");
-const Marks = require("../model/Marks");
+const Teacher = require('../model/Teacher');
+const Marks = require('../model/Marks');
 
 // @route   GET /api/teacher
 // @desc    Get logged in teacher
@@ -8,17 +8,17 @@ exports.getTeacher = async (req, res) => {
   const email = req.email;
   const role = req.role;
 
-  if (!email || !role || role !== "teacher") {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!email || !role || role !== 'teacher') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const teacher = await Teacher.findOne({ tEmail: email })
-    .select("-tPassword")
+    .select('-tPassword')
     .lean()
     .exec();
 
   if (!teacher) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res.status(400).json({ message: 'Invalid credentials' });
   }
 
   return res.json({ teacher });
@@ -30,17 +30,17 @@ exports.getTeacher = async (req, res) => {
 exports.getStudentMarks = async (req, res) => {
   const role = req.role;
 
-  if (!role || role !== "teacher") {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!role || role !== 'teacher') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const marks = await Marks.find()
-    .populate("studentId", "sName sEmail")
+    .populate('studentId', 'sName sId')
     .lean()
     .exec();
 
   if (!marks) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res.status(400).json({ message: 'Invalid credentials' });
   }
 
   return res.json({ marks });
@@ -52,20 +52,20 @@ exports.getStudentMarks = async (req, res) => {
 exports.getStudentMarksById = async (req, res) => {
   const role = req.role;
 
-  if (!role || role !== "teacher") {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!role || role !== 'teacher') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const studentId = req.params.id;
 
   if (!studentId) {
-    return res.status(400).json({ message: "No student id!" });
+    return res.status(400).json({ message: 'No student id!' });
   }
 
   const marks = await Marks.findOne({ studentId }).lean().exec();
 
   if (!marks) {
-    return res.status(400).json({ message: "No marks with this student!" });
+    return res.status(400).json({ message: 'No marks with this student!' });
   }
 
   return res.json({ marks });
@@ -77,15 +77,15 @@ exports.getStudentMarksById = async (req, res) => {
 exports.addStudentMarks = async (req, res) => {
   const role = req.role;
 
-  if (!role || role !== "teacher") {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!role || role !== 'teacher') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const { subjectMarks } = req.body;
   const studentId = req.params.id;
 
   if (!subjectMarks || !studentId) {
-    return res.status(400).json({ message: "All fields required!" });
+    return res.status(400).json({ message: 'All fields required!' });
   }
 
   const marks = await Marks.findOne({ studentId }).lean().exec();
@@ -101,7 +101,7 @@ exports.addStudentMarks = async (req, res) => {
       { new: true }
     );
 
-    return res.json({ message: "Marks updated success!" });
+    return res.json({ message: 'Marks updated success!' });
   }
 
   await Marks.create({
@@ -109,7 +109,7 @@ exports.addStudentMarks = async (req, res) => {
     subjectMarks,
   });
 
-  return res.json({ message: "Marks added success!" });
+  return res.json({ message: 'Marks added success!' });
 };
 
 // @route   PUT /api/teacher/marks-list/:id
@@ -118,26 +118,26 @@ exports.addStudentMarks = async (req, res) => {
 exports.updateStudentMarksById = async (req, res) => {
   const role = req.role;
 
-  if (!role || role !== "teacher") {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!role || role !== 'teacher') {
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const { subjectMarks } = req.body;
 
   if (!subjectMarks) {
-    return res.status(203).json({ message: "No marks to update!" });
+    return res.status(203).json({ message: 'No marks to update!' });
   }
 
   const studentId = req.params.id;
 
   if (!studentId) {
-    return res.status(400).json({ message: "No student id!" });
+    return res.status(400).json({ message: 'No student id!' });
   }
 
   const marks = await Marks.findOne({ studentId }).lean().exec();
 
   if (!marks) {
-    return res.status(400).json({ message: "No marks with this student!" });
+    return res.status(400).json({ message: 'No marks with this student!' });
   }
 
   await Marks.findOneAndUpdate(
@@ -154,5 +154,5 @@ exports.updateStudentMarksById = async (req, res) => {
     }
   );
 
-  return res.json({ message: "Marks updated success!" });
+  return res.json({ message: 'Marks updated success!' });
 };

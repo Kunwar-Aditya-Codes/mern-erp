@@ -66,9 +66,11 @@ const Sidebar = ({
                 View Profile
               </h1>
             </Link>
-            <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
-              View Students
-            </h1>
+            <Link to='/dashboard/teacher/view-students'>
+              <h1 className='mt-4 cursor-pointer rounded-md p-3 hover:bg-zinc-300/10 hover:text-zinc-300'>
+                View Students
+              </h1>
+            </Link>
           </>
         )}
 

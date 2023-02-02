@@ -1,5 +1,6 @@
 const Student = require('../model/Student');
 const Teacher = require('../model/Teacher');
+const Marks = require('../model/Marks');
 const bcrypt = require('bcrypt');
 
 // @route   POST /api/admin/createUser
@@ -30,7 +31,9 @@ exports.createUser = async (req, res) => {
       sImage: image,
     });
 
-    await newStudent.save();
+    const savedStudent = await newStudent.save();
+
+    await new Marks({ studentId: savedStudent._id }).save();
 
     return res.json({ message: 'Student created!' });
   }
