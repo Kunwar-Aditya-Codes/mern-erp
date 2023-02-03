@@ -35,7 +35,7 @@ exports.getStudentMarks = async (req, res) => {
   }
 
   const marks = await Marks.find()
-    .populate('studentId', 'sName sId')
+    .populate('studentId', 'sName sId sImage')
     .lean()
     .exec();
 
@@ -62,7 +62,10 @@ exports.getStudentMarksById = async (req, res) => {
     return res.status(400).json({ message: 'No student id!' });
   }
 
-  const marks = await Marks.findOne({ studentId }).lean().exec();
+  const marks = await Marks.findOne({ studentId })
+    .populate('studentId', 'sName sId sImage')
+    .lean()
+    .exec();
 
   if (!marks) {
     return res.status(400).json({ message: 'No marks with this student!' });

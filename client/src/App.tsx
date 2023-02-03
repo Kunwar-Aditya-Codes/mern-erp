@@ -16,6 +16,7 @@ import AdminViewTeachers from './pages/Admin/AdminViewTeachers';
 import SProfile from './pages/Student/SProfile';
 import TProfile from './pages/Teacher/TProfile';
 import StudentMarksList from './pages/Teacher/StudentMarksList';
+import StudentMarks from './pages/Teacher/StudentMarks';
 
 function App() {
   return (
@@ -47,7 +48,8 @@ function App() {
               <Route element={<RequireAuth allowedRole={[Roles.teacher]} />}>
                 <Route path='teacher'>
                   <Route index element={<TProfile />} />
-                  <Route path="view-students" element={<StudentMarksList />} />
+                  <Route path='view-students' element={<StudentMarksList />} />
+                  <Route path='view-students/:id' element={<StudentMarks />} />
                 </Route>
               </Route>
 

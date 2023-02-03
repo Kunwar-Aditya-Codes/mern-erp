@@ -30,8 +30,18 @@ const teacherApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+
+    getStudentMarksById: builder.query({
+      query: (id) => ({
+        url: `/teacher/marks-list/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetLoggedInTeacherQuery, useGetStudentsMarksQuery } =
-  teacherApiSlice;
+export const {
+  useGetLoggedInTeacherQuery,
+  useGetStudentsMarksQuery,
+  useGetStudentMarksByIdQuery,
+} = teacherApiSlice;
