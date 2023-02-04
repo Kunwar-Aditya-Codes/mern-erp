@@ -4,11 +4,13 @@ import { useGetStudentMarksByIdQuery } from '../../app/slices/teacherApiSlice';
 import StudentMarksModal from '../../components/StudentMarksModal';
 
 const StudentMarks = () => {
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState<boolean>(false);
 
   const { id } = useParams();
 
   const { data, isLoading, error } = useGetStudentMarksByIdQuery(id);
+
+  const subjectMarks = data?.marks.subjectMarks;
 
   let content = isLoading ? (
     <div>Loading...</div>
@@ -57,7 +59,13 @@ const StudentMarks = () => {
           </Link>
         </div>
 
-        {modal && <StudentMarksModal setModal={setModal} studentId={id} />}
+        {modal && (
+          <StudentMarksModal
+            setModal={setModal}
+            studentId={id}
+            subjectMarks={subjectMarks}
+          />
+        )}
       </div>
     )
   );
