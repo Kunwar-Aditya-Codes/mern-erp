@@ -98,6 +98,7 @@ exports.deleteUser = async (req, res) => {
 
   if (role === 'student') {
     await Student.findByIdAndDelete(id);
+    await Marks.findByIdAndDelete({ studentId: id });
     return res.json({ message: 'Student deleted!' });
   }
 
