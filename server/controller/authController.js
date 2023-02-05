@@ -39,9 +39,9 @@ exports.login = async (req, res) => {
     );
 
     res.cookie('refreshToken', refreshToken, {
-      // httpOnly: true,
-      // sameSite: "strict",
-      // secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: true,
     });
 
     return res.json({ accessToken });
@@ -87,9 +87,9 @@ exports.loginStudent = async (req, res) => {
   );
 
   res.cookie('refreshToken', refreshToken, {
-    // httpOnly: true,
-    // sameSite: "strict",
-    // secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: true,
   });
 
   return res.json({ accessToken });
@@ -132,9 +132,9 @@ exports.loginTeacher = async (req, res) => {
   );
 
   res.cookie('refreshToken', refreshToken, {
-    // httpOnly: true,
-    // sameSite: "strict",
-    // secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: true,
   });
 
   return res.json({ accessToken });

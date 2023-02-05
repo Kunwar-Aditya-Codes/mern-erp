@@ -4,5 +4,9 @@
   "main": "index.js",
   "repository": "https://github.com/Kunwar-Aditya-Codes/mern-erp.git",
   "author": "Kunwar Aditya <adityakunwar0147@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "cd server && yarn install --ignore-engines && cd ../client && yarn install --ignore-engines && yarn build",
+    "start": "node server/server.js"
+  }
 }
