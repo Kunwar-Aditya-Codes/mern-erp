@@ -1,19 +1,19 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   getStudent,
   getStudentMarks,
-} = require("../controller/studentController");
-const verifyJwt = require("../middleware/verifyJwt");
+} = require('../controller/studentController');
+const verifyJwt = require('../middleware/verifyJwt');
 
 router.use((req, res, next) => {
-  console.log("Student Routes");
+  console.log('Student Routes');
   next();
 });
 
 router.use(verifyJwt);
 
-router.route("/").get(getStudent);
+router.route('/').get(getStudent);
 
-router.route("/:id").get(getStudentMarks);
+router.route('/marks').get(getStudentMarks);
 
 module.exports = router;

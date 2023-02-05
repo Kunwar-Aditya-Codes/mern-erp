@@ -30,7 +30,7 @@ const StudentMarksModal = ({ setModal, studentId, subjectMarks }: any) => {
     setStudentMarks(newStudentMarks);
   };
 
-  const [addStudentMarks, { isLoading }] = useAddStudentMarksMutation();
+  const [addStudentMarks] = useAddStudentMarksMutation();
 
   const handleAdd = async () => {
     toast.loading('Adding marks...', {
@@ -53,10 +53,6 @@ const StudentMarksModal = ({ setModal, studentId, subjectMarks }: any) => {
     });
 
     setModal(false);
-  };
-
-  const handleUpdate = async () => {
-    console.log(studentMarks);
   };
 
   return (
@@ -116,12 +112,6 @@ const StudentMarksModal = ({ setModal, studentId, subjectMarks }: any) => {
             className='mt-6 w-full  rounded-md bg-transparent bg-violet-600 px-4 py-2 text-white '
           >
             Add
-          </button>
-          <button
-            onClick={handleUpdate}
-            className='mt-6 w-full  rounded-md border-2 border-violet-600 bg-transparent px-4 py-2 text-white '
-          >
-            Update
           </button>
         </div>
       </div>

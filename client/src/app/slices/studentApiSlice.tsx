@@ -23,7 +23,15 @@ const studentApiSlice = apiSlice.injectEndpoints({
         return response;
       },
     }),
+
+    getStudentMark: build.query({
+      query: () => ({
+        url: `/student/marks`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetLoggedInStudentQuery } = studentApiSlice;
+export const { useGetLoggedInStudentQuery, useGetStudentMarkQuery } =
+  studentApiSlice;

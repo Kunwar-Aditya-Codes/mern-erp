@@ -17,6 +17,7 @@ import SProfile from './pages/Student/SProfile';
 import TProfile from './pages/Teacher/TProfile';
 import StudentMarksList from './pages/Teacher/StudentMarksList';
 import StudentMarks from './pages/Teacher/StudentMarks';
+import SViewMarks from './pages/Student/SViewMarks';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
               <Route element={<RequireAuth allowedRole={[Roles.student]} />}>
                 <Route path='student'>
                   <Route index element={<SProfile />} />
+                  <Route path='view' element={<SViewMarks />} />
                 </Route>
               </Route>
             </Route>
