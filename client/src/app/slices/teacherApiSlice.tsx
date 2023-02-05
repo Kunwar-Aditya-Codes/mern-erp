@@ -29,6 +29,8 @@ const teacherApiSlice = apiSlice.injectEndpoints({
         url: '/teacher/marks-list',
         method: 'GET',
       }),
+
+      providesTags: ['StudentMarks'],
     }),
 
     getStudentMarksById: builder.query({
@@ -36,6 +38,18 @@ const teacherApiSlice = apiSlice.injectEndpoints({
         url: `/teacher/marks-list/${id}`,
         method: 'GET',
       }),
+
+      providesTags: ['StudentMarks'],
+    }),
+
+    addStudentMarks: builder.mutation({
+      query: ({ studentId, subjectMarks }) => ({
+        url: `/teacher/marks-list/${studentId}`,
+        method: 'POST',
+        body: { subjectMarks },
+      }),
+
+      invalidatesTags: ['StudentMarks'],
     }),
   }),
 });
@@ -44,4 +58,5 @@ export const {
   useGetLoggedInTeacherQuery,
   useGetStudentsMarksQuery,
   useGetStudentMarksByIdQuery,
+  useAddStudentMarksMutation,
 } = teacherApiSlice;

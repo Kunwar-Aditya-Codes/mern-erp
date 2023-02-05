@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { useAddStudentMarksMutation } from '../app/slices/teacherApiSlice';
+import toast from 'react-hot-toast';
 
 const StudentMarksModal = ({ setModal, studentId, subjectMarks }: any) => {
   const [studentMarks, setStudentMarks] = useState<any>(
-    subjectMarks.map((sub: any) => ({
-      subject: sub.subject,
-      marks: sub.marks,
-    }))
+    subjectMarks.length > 0
+      ? subjectMarks.map((sub: any) => ({
+          subject: sub.subject,
+          marks: sub.marks,
+        }))
+      : [
+          {
+            subject: '',
+            marks: 0,
+          },
+        ]
   );
 
   const handleSubject = (e: any, index: number) => {
@@ -21,8 +30,29 @@ const StudentMarksModal = ({ setModal, studentId, subjectMarks }: any) => {
     setStudentMarks(newStudentMarks);
   };
 
+  const [addStudentMarks, { isLoading }] = useAddStudentMarksMutation();
+
   const handleAdd = async () => {
-    console.log(studentMarks);
+    toast.loading('Adding marks...', {
+      id: 'add-marks',
+    });
+
+    const res: any = await addStudentMarks({
+      studentId,
+      subjectMarks: studentMarks,
+    });
+
+    if (res.error) {
+      toast.error(res.error.message, {
+        id: 'add-marks',
+      });
+    }
+
+    toast.success('Marks added successfully', {
+      id: 'add-marks',
+    });
+
+    setModal(false);
   };
 
   const handleUpdate = async () => {

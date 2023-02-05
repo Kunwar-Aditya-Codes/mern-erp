@@ -4,7 +4,6 @@ const {
   getStudentMarks,
   addStudentMarks,
   getStudentMarksById,
-  updateStudentMarksById,
 } = require("../controller/teacherController");
 const verifyJwt = require("../middleware/verifyJwt");
 
@@ -23,6 +22,5 @@ router
   .route("/marks-list/:id")
   .post(addStudentMarks)
   .get(getStudentMarksById)
-  .put(updateStudentMarksById);
 
 module.exports = router;
