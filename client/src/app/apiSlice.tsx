@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setToken } from './slices/authSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api',
+  // baseUrl: 'http://localhost:5000/api',
+  baseUrl: 'https://mern-erp.onrender.com/api',
   credentials: 'include',
   prepareHeaders: (headers, { getState }: any) => {
     const token = getState()?.auth?.token;
